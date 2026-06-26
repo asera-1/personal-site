@@ -1,0 +1,46 @@
+---
+title: 'Building a GPT from scratch on Shakespeare'
+date: '2026-06-26'
+tags: ['nlp', 'transformers', 'pytorch']
+draft: false
+summary: 'I built a decoder-only Transformer from scratch and compared it against a smoothed trigram baseline on Shakespeare. Validation perplexity went from 126 with the n-gram model to 83 with the Transformer.'
+---
+
+I wanted to see, on one dataset and end to end, how a neural language model compares to a classical statistical one. So I built three things from scratch and measured them the same way: a byte pair encoding tokenizer, a smoothed n-gram model, and a small decoder-only Transformer. The data is the works of Shakespeare, split into train, validation, and test.
+
+## The tokenizer
+
+I trained a byte pair encoding tokenizer on the training split only, with 500 merges. That gives a vocabulary of 519 subword tokens. Subwords keep the vocabulary small and let rare words break down into pieces the model has already seen, which makes the learning problem easier than working at the word level.
+
+## A classical baseline
+
+The first model is a trigram with add-one (Laplace) smoothing and a simple interpolation across unigram, bigram, and trigram counts, weighted 0.1, 0.3, and 0.6. It is an honest baseline. It captures local word statistics, but it has almost no memory of earlier context and it suffers from data sparsity. It reaches a validation perplexity of 126 and a test perplexity of 127.
+
+## The Transformer
+
+The second model is a decoder-only Transformer written from scratch in PyTorch: token and position embeddings, masked multi-head self-attention, GELU feed-forward blocks, and a final projection back to the vocabulary. The version behind these numbers is four layers wide at 256 dimensions. I trained it with AdamW and a cosine learning rate schedule for six epochs, using a block size of 128 and a batch size of 64, at a learning rate of 3e-4. Everything ran on CPU, so the scale is deliberately small.
+
+## Results
+
+Lower perplexity is better.
+
+| Model                           | Validation | Test  |
+| ------------------------------- | ---------- | ----- |
+| Trigram with interpolation      | 126.1      | 127.3 |
+| Transformer (4 layers, 256 dim) | 82.9       | 83.1  |
+
+The Transformer cuts perplexity by about a third. The training and validation loss curves converge within the six epochs and the validation loss flattens without diverging, so there is little overfitting at this size.
+
+## What the model writes
+
+Seeded with the word "love", the trained model produces fragments like this:
+
+> love and life to your polones of your confrain my botters caping of word of the life that the stonius case me of our ressing tins of a does and purderly in your mp to be the world of the light
+
+It has the rhythm and shape of the source, with the invented words and repetition you would expect from a small model trained briefly on CPU.
+
+## What I took from it
+
+The outcome is not surprising, but building each piece by hand made the reasons concrete. Subword tokenization plus attention models longer context far better than counting n-grams, and the gap shows up cleanly in perplexity on held out text. The obvious next steps are a larger vocabulary, a deeper model, longer training, and a GPU, each of which I would expect to lower perplexity further.
+
+The full code, tokenizer, model, and training pipeline are on GitHub: [asera-1/gpt-from-scratch](https://github.com/asera-1/gpt-from-scratch).

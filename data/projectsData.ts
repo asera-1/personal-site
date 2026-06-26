@@ -14,7 +14,7 @@ const projectsData: Project[] = [
   {
     title: 'GPT from Scratch: a small language model',
     description: `A decoder only Transformer language model built from scratch in PyTorch, including a BPE tokenizer, the training loop, and evaluation. By reworking the model and the data pipeline I brought validation perplexity down from 126 to 83.`,
-    href: 'https://github.com/asera-1/gpt-from-scratch',
+    href: '/blog/building-gpt-from-scratch',
   },
   {
     title: 'Demand Forecasting',
