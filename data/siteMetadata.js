@@ -7,7 +7,7 @@ const siteMetadata = {
     'Founder of Flowent, building AI speaking practice for university language programs. I work across product, sales, fundraising, and engineering. MSc Cognitive Science at Universität Osnabrück.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://YOUR-DOMAIN.vercel.app', // placeholder — update after first Vercel deploy
+  siteUrl: 'https://personal-site-zeta-ashen.vercel.app',
   siteRepo: 'https://github.com/asera-1/personal-site',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
