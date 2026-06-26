@@ -4,9 +4,9 @@ const siteMetadata = {
   author: 'Abdalla Sera',
   headerTitle: 'Abdalla Sera',
   description:
-    'Founder and AI product builder. MSc Cognitive Science (ML & AI) at Universität Osnabrück. Building Flowent: AI speaking practice grounded in how people actually learn languages.',
+    'Founder of Flowent, building AI speaking practice for university language programs. I work across product, sales, fundraising, and engineering. MSc Cognitive Science at Universität Osnabrück.',
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // system, dark or light
   siteUrl: 'https://YOUR-DOMAIN.vercel.app', // placeholder — update after first Vercel deploy
   siteRepo: 'https://github.com/asera-1/personal-site',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,

@@ -8,24 +8,21 @@ interface Project {
 const projectsData: Project[] = [
   {
     title: 'Flowent',
-    description: `AI-powered speaking practice for university language programs. Built on LLMs and voice AI, grounded in second-language-acquisition research. First institutional contract with the Universität Osnabrück Language Centre, plus native iOS and Android apps with a spaced-repetition engine.`,
+    description: `An AI speaking practice platform for university language programs. It uses large language models and voice AI to give learners structured speaking practice, grounded in research on second language acquisition. We signed our first institutional contract with the Universität Osnabrück Language Centre and ship native iOS and Android apps. I lead product, engineering, sales, and fundraising.`,
     href: 'https://getflowent.com',
-    // imgSrc: '/static/images/flowent.png',
   },
   {
-    title: 'GPT-from-Scratch: Shakespeare Language Model',
-    description: `A decoder-only Transformer built from scratch: BPE tokenizer, training loop, and evaluation. Improved perplexity from 126 to 83 through model and data-pipeline design.`,
+    title: 'GPT from Scratch: a small language model',
+    description: `A decoder only Transformer language model built from scratch in PyTorch, including a BPE tokenizer, the training loop, and evaluation. By reworking the model and the data pipeline I brought validation perplexity down from 126 to 83.`,
     href: 'https://github.com/asera-1/gpt-from-scratch',
-    // imgSrc: '/static/images/gpt.png',
   },
   {
-    title: 'Demand Forecasting (Prophet, XGBoost)',
-    description: `Time-series demand prediction with VisioLab and Universität Osnabrück: preprocessing, cross-validation, hierarchical reconciliation, and deployment via FastAPI REST endpoints.`,
-    // href: '',
+    title: 'Demand Forecasting',
+    description: `A time series demand forecasting project with VisioLab and Universität Osnabrück. It covers data preprocessing, cross validation, hierarchical reconciliation across product levels, and deployment as REST endpoints with FastAPI. Built with Prophet and XGBoost.`,
   },
   {
-    title: 'Enterprise Network & Security Emulation',
-    description: `Multi-branch enterprise network with a spine-leaf data center and an end-to-end MPLS service-provider core (OSPF, MP-BGP, VRF, HSRP), built in EVE-NG. B.Eng. graduation project.`,
+    title: 'Enterprise Network and Security Emulation',
+    description: `My B.Eng. graduation project. A multi branch enterprise network with a spine and leaf data center and an end to end MPLS service provider core, using OSPF, MP-BGP, VRF, and HSRP, built and tested in EVE-NG.`,
     href: 'https://github.com/asera-1/Bachelor-Graduation-Project-',
   },
 ]
