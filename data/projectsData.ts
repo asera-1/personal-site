@@ -35,7 +35,7 @@ const projectsData: Project[] = [
     title: 'Enterprise Network and Security Emulation',
     tag: 'Engineering, networks',
     description: `My B.Eng. graduation project. A multi branch enterprise network with a spine and leaf data center and an end to end MPLS service provider core, using OSPF, MP-BGP, VRF, and HSRP, built and tested in EVE-NG.`,
-    href: 'https://github.com/asera-1/Bachelor-Graduation-Project-',
+    href: '/blog/enterprise-network-emulation',
   },
 ]
 

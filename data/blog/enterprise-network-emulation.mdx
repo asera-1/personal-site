@@ -1,0 +1,33 @@
+---
+title: 'Emulating a bank network, from the branch to the MPLS core'
+date: '2026-06-22'
+tags: ['networking', 'mpls', 'data-center']
+draft: false
+summary: 'My Bachelor graduation project: a full enterprise and service provider network for a fictional bank, designed and emulated end to end in EVE-NG, with a spine and leaf data center and an MPLS VPN backbone.'
+---
+
+This was my Bachelor graduation project at Al-Azhar University. The goal was to design and emulate a complete enterprise network and security setup for a fictional bank, from the access switches in a branch all the way to the service provider core that ties the sites together. The whole thing runs in EVE-NG on Cisco devices, so every protocol below is actually configured and tested, not just drawn on a diagram.
+
+## The setup
+
+The network models a bank with four parts: a headquarters in Cairo, a branch in Alexandria, a data center, and a service provider core that connects them over MPLS. I designed each piece to resemble something a real bank would run, with redundancy and segmentation throughout.
+
+## The enterprise sites
+
+The headquarters and branch follow a classic hierarchical design. At the access layer, departments are separated into VLANs, with port security and BPDU guard to lock down the edge, MST for loop free switching, and VTP to distribute VLANs. The distribution layer runs OSPF for fast intra site routing and HSRP so a gateway can fail without users noticing. Links and devices are doubled up, so there is no single point of failure.
+
+## The data center
+
+The data center uses a spine and leaf fabric rather than the older three tier design. Every leaf connects to every spine, which keeps the path between any two servers short and predictable and makes it easy to add capacity. It hosts the bank's application servers, with access secured over HTTPS.
+
+## The service provider core
+
+The most involved part is the MPLS backbone that connects the sites. It carries each site's traffic in its own MPLS VPN, keeping routes separate with VRFs and with route distinguishers and route targets. MP-BGP exchanges the VPN routes and their labels between provider edge routers, OSPF runs as the interior protocol inside the core, and route reflectors cut down the number of BGP sessions so the design scales. There are provider edge routers for the Alexandria and Aswan sites.
+
+## What it demonstrates
+
+The point was to put the whole stack together and show it working end to end: connectivity between branches, HSRP failover, OSPF convergence, MPLS VPN reachability across sites, and secure access to data center services. It covers the parts of a network that usually sit with different teams, the campus switching, the routing, the data center fabric, and the provider core, in a single design.
+
+I left a few things for later: a Fortigate firewall, DMVPN for more scalable VPNs, and a RADIUS server for central authentication.
+
+The configurations, topology diagrams, and the full written report are on GitHub: [asera-1/Bachelor-Graduation-Project-](https://github.com/asera-1/Bachelor-Graduation-Project-).
