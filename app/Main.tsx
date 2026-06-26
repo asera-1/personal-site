@@ -35,8 +35,6 @@ const ops = [
   },
 ]
 
-const tags = ['Venture, founder', 'Engineering, NLP', 'Engineering, ML', 'Engineering, networks']
-
 export default function Home({ posts }) {
   const recent = posts.slice(0, 3)
   return (
@@ -123,11 +121,11 @@ export default function Home({ posts }) {
         <p className="font-mono text-xs tracking-widest text-[#5C6E92] uppercase">Selected work</p>
         <h2 className="mt-2 text-2xl font-extrabold text-white">Ventures and engineering.</h2>
         <div className="mt-7 grid gap-4 sm:grid-cols-2">
-          {projectsData.map((p, i) => {
+          {projectsData.map((p) => {
             const inner = (
               <div className="h-full rounded-2xl border border-[#16294f] bg-[#0E2147]/40 p-6 transition hover:border-[#34C7EC]/60">
                 <div className="font-mono text-[11px] tracking-wider text-[#34C7EC] uppercase">
-                  {tags[i]}
+                  {p.tag}
                 </div>
                 <h3 className="mt-2.5 text-lg font-extrabold text-white">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#9FB1D0]">{p.description}</p>

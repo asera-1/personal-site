@@ -1,0 +1,54 @@
+---
+title: 'Scaling laws, fine-tuning, and LoRA on a small language model'
+date: '2026-06-25'
+tags: ['nlp', 'transformers', 'lora']
+draft: false
+summary: 'A study on a small GPT trained on Shakespeare: a four by four scaling law grid, supervised fine-tuning on two tasks, and a from scratch LoRA implementation that matches full fine-tuning while training 0.34 percent of the parameters.'
+---
+
+This project uses a small GPT, with nanoGPT as the training harness, to study three things on one dataset: how performance scales with model and data size, how supervised fine-tuning behaves on downstream tasks, and how far a parameter efficient method can go. The data is Shakespeare throughout. The experiment design, the fine-tuning tasks, the LoRA implementation, and the analysis are mine.
+
+## Part 1: Scaling laws
+
+I trained a four by four grid: four model sizes against four dataset fractions, sixteen runs in total. The sizes run from 0.12M to 25.3M parameters (XS, S, M, L).
+
+The validation loss grid shows one clear pattern. The best model size grows with the amount of data.
+
+| Data | Best model | Validation loss |
+| ---- | ---------- | --------------- |
+| 10%  | S (0.83M)  | 2.26            |
+| 25%  | S (0.83M)  | 2.02            |
+| 50%  | M (10.75M) | 1.87            |
+| 100% | L (25.34M) | 1.47            |
+
+At small data the larger models overfit and the small models win. As data grows, the larger models pull ahead. It is the compute optimal trade off in miniature: more data is needed before more parameters pay off.
+
+## Part 2: Supervised fine-tuning
+
+I fine-tuned the pretrained M model (10.75M parameters) on two Shakespeare tasks. Task A is speaker identification from a line of dialogue, with ten speakers, so random guessing is 10 percent. Task B classifies a passage as verse or prose, where random is 50 percent. I ran each task on its own and both together, and tracked the Shakespeare validation loss to measure forgetting.
+
+| Setup              | Task A | Task B | Shakespeare val loss |
+| ------------------ | ------ | ------ | -------------------- |
+| Random baseline    | 10.0%  | 50.0%  | n/a                  |
+| Pretrained         | n/a    | n/a    | 1.23                 |
+| Single task A      | 21.0%  | n/a    | 1.28                 |
+| Single task B      | n/a    | 91.8%  | 1.48                 |
+| Multi task A and B | 21.0%  | 89.0%  | 1.28                 |
+
+Task B is easy and the model reaches 92 percent. Task A is hard at this scale and reaches 21 percent, still twice the random baseline. The multi task model holds both tasks close to their single task numbers while keeping the lowest language model loss, so training on both at once causes the least forgetting.
+
+## Part 3: LoRA from scratch
+
+I implemented LoRA from scratch, injecting trainable low rank matrices into the attention projections and freezing every pretrained weight. The second matrix starts at zero, so the adapted model begins identical to the base model. The point is to adapt the model while training almost nothing.
+
+| Method           | Rank | Trainable params | Task A |
+| ---------------- | ---- | ---------------- | ------ |
+| Full fine-tuning | n/a  | 10,745,088       | 21.0%  |
+| LoRA             | 1    | 9,216            | 17.0%  |
+| LoRA             | 4    | 36,864           | 24.0%  |
+| LoRA             | 8    | 73,728           | 23.0%  |
+| LoRA             | 16   | 147,456          | 21.0%  |
+
+At rank 4, LoRA trains 36,864 parameters, which is 0.34 percent of the model, and matches or slightly beats full fine-tuning on Task A. Rank 4 is the sweet spot here: rank 1 underfits, and higher ranks add parameters without helping. This is the practical case for LoRA. It reaches near full fine-tuning quality at a tiny fraction of the trainable parameters, which is what makes it possible to keep many task specific adapters around a single frozen base model.
+
+The code, including the scaling law configs, the fine-tuning task builders, and the LoRA implementation, is on GitHub: [asera-1/nlp-scaling-laws-lora](https://github.com/asera-1/nlp-scaling-laws-lora).
