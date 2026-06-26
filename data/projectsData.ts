@@ -28,7 +28,8 @@ const projectsData: Project[] = [
   {
     title: 'Demand Forecasting',
     tag: 'Engineering, ML',
-    description: `A time series demand forecasting project with VisioLab and Universität Osnabrück. It covers data preprocessing, cross validation, hierarchical reconciliation across product levels, and deployment as REST endpoints with FastAPI. Built with Prophet and XGBoost.`,
+    description: `A university course project with VisioLab: forecasting daily and 15 minute cafeteria sales for two stores. Prophet for daily totals, XGBoost for interval and category predictions, and Min Trace hierarchical reconciliation, served through a REST API. Domain features and Bayesian tuning cut daily forecast error by about seven times.`,
+    href: '/blog/demand-forecasting-visiolab',
   },
   {
     title: 'Enterprise Network and Security Emulation',

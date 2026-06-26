@@ -1,0 +1,48 @@
+---
+title: 'Demand forecasting for VisioLab: Prophet, XGBoost, and reconciliation'
+date: '2026-06-23'
+tags: ['forecasting', 'time-series', 'machine-learning']
+draft: false
+summary: 'A university course project with VisioLab: forecasting daily and 15 minute cafeteria sales for two stores with Prophet and XGBoost, served through a REST API. Domain features and tuning cut daily forecast error by about seven times.'
+---
+
+This was a final project for the "AI in Practice" course at Universität Osnabrück, built with VisioLab as the client. The brief was practical. Forecast how many food items each of two stores would sell, both as a daily total and broken down by category in every 15 minute interval, and serve the predictions through a REST API. I worked on it as part of a team. The client data is private, so this is a write-up of the approach and the results, not a public repository.
+
+## The data
+
+Two stores, two years of point of sale data from 2023 and 2024, segmented into 15 minute intervals. Each interval records items sold across fourteen categories, from mains and sides to drinks, baked goods, and condiments. We held out everything after October 2024 as the test set, an 80/20 split by time.
+
+## Exploration and preprocessing
+
+The two stores followed similar yearly patterns, with strong weekly cycles and clear dips during semester breaks, which makes sense for a university setting. Two categories, baked goods and condiments, were only recorded from October 2024. We treated those as a missing data problem: a linear regression per store predicted the earlier values from the correlated categories, and the imputed amounts were taken back out of the "other" bucket so daily totals stayed unchanged. Outliers were winsorized and a rolling median smoothed short term noise.
+
+## Models
+
+The final system used two models at different levels of the hierarchy.
+
+Prophet handled the daily totals. It deals well with seasonality and holidays and accepts custom regressors, so we added semester phases and German public holidays, including the Christmas and summer breaks. Its prior scales for trend, seasonality, and holidays were tuned with Bayesian optimization.
+
+XGBoost handled the fine grained 15 minute, per category predictions, using temporal and calendar features with time based cross validation. We then combined the two levels with Min Trace hierarchical reconciliation, so the daily and interval forecasts agree with each other.
+
+We considered an LSTM but set it aside. With this amount of data, Prophet and XGBoost were both more accurate and far more interpretable.
+
+## Results
+
+The biggest lever was domain aware tuning. Adding the holiday and semester regressors and running Bayesian optimization cut daily forecast error by roughly seven times against a baseline Prophet.
+
+| Model             | Store   | MAE  | RMSE |
+| ----------------- | ------- | ---- | ---- |
+| Baseline Prophet  | Store 1 | 1491 | 1912 |
+| Optimized Prophet | Store 1 | 202  | 263  |
+| Baseline Prophet  | Store 2 | 4676 | 5453 |
+| Optimized Prophet | Store 2 | 444  | 560  |
+
+Evaluation used five fold time series cross validation over the most recent ninety days, scored with MAE and RMSE. The interval level XGBoost models were tuned across the category and temporal hierarchy. Reconciliation was harder to judge, since the higher levels of the hierarchy have very few samples to learn from.
+
+## Engineering
+
+The project was built to run outside a notebook. Experiments were configurable and tracked with MLflow, models were serialized with joblib, and predictions were served through a REST API with two routes: a daily total for a given store and date, and the category breakdown for the interval closest to a given timestamp. The recommendation was to retrain monthly or quarterly to keep up with shifting demand.
+
+## What I took from it
+
+The clearest lesson was how much domain knowledge matters. The model architecture mattered less than encoding what we knew about the setting, the student calendar and the local holidays, which is where most of the accuracy came from. It was also a good exercise in shipping a model as a service rather than a notebook, with experiment tracking, serialization, and an API around it.
