@@ -11,7 +11,7 @@ const ops = [
   {
     n: '02',
     t: 'Institutional sales',
-    d: 'I closed our first university contract and I am building a pipeline through language centres.',
+    d: 'We landed our first university contract, and I am building the pipeline through language centres.',
   },
   {
     n: '03',
@@ -42,7 +42,7 @@ export default function Home({ posts }) {
       <section className="grid items-center gap-8 py-10 md:grid-cols-[1fr_160px]">
         <div>
           <p className="font-mono text-xs tracking-widest text-[#34C7EC] uppercase">
-            Founder, operator, applied AI
+            Co-founder, operator, applied AI
           </p>
           <h1 className="mt-4 text-4xl leading-tight font-extrabold tracking-tight text-white sm:text-5xl">
             I build AI products, and{' '}
@@ -59,9 +59,9 @@ export default function Home({ posts }) {
             .
           </h1>
           <p className="mt-5 max-w-xl text-lg text-[#9FB1D0]">
-            I founded Flowent, an AI speaking practice platform for universities. I work across the
-            whole business: product and engineering, institutional sales, fundraising, and go to
-            market. So far I have taken it from an idea to its first signed institutional contract.
+            I co-founded Flowent, an AI speaking practice platform for universities. I work across
+            the whole business: product and engineering, institutional sales, fundraising, and go to
+            market. We took it from an idea to its first signed institutional contract.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#1B2E54] bg-[#34C7EC]/10 px-4 py-2 text-sm text-white">
             <span className="h-2 w-2 rounded-full bg-[#34C7EC]" />
@@ -148,11 +148,11 @@ export default function Home({ posts }) {
       <section className="border-t border-[#16294f] py-12">
         <p className="font-mono text-xs tracking-widest text-[#5C6E92] uppercase">About</p>
         <h2 className="mt-2 text-2xl font-extrabold text-white">
-          Technical founder, business first.
+          Technical co-founder, business first.
         </h2>
         <div className="mt-4 max-w-2xl space-y-4 text-[#9FB1D0]">
           <p>
-            I am a founder who works across the whole business: product, growth, sales, and the
+            I am a co-founder who works across the whole business: product, growth, sales, and the
             technology itself. I care about products that institutions actually adopt, not demos.
           </p>
           <p>

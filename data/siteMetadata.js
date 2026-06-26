@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Abdalla Sera',
   headerTitle: 'Abdalla Sera',
   description:
-    'Founder of Flowent, building AI speaking practice for university language programs. I work across product, sales, fundraising, and engineering. MSc Cognitive Science at Universität Osnabrück.',
+    'Co-founder of Flowent, building AI speaking practice for university language programs. I work across product, sales, fundraising, and engineering. MSc Cognitive Science at Universität Osnabrück.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://personal-site-zeta-ashen.vercel.app',

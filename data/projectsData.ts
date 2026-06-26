@@ -9,8 +9,8 @@ interface Project {
 const projectsData: Project[] = [
   {
     title: 'Flowent',
-    tag: 'Venture, founder',
-    description: `An AI speaking practice platform for university language programs. It uses large language models and voice AI to give learners structured speaking practice, grounded in research on second language acquisition. We signed our first institutional contract with the Universität Osnabrück Language Centre and ship native iOS and Android apps. I lead product, engineering, sales, and fundraising.`,
+    tag: 'Venture, co-founder',
+    description: `An AI speaking practice platform for university language programs. It uses large language models and voice AI to give learners structured speaking practice, grounded in research on second language acquisition. We signed our first institutional contract with the Universität Osnabrück Language Centre and ship native iOS and Android apps. I work across product, engineering, sales, and fundraising.`,
     href: '/blog/building-flowent',
   },
   {
