@@ -10,7 +10,7 @@ const siteMetadata = {
   siteUrl: 'https://personal-site-zeta-ashen.vercel.app',
   siteRepo: 'https://github.com/asera-1/personal-site',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  socialBanner: `${process.env.BASE_PATH || ''}/static/images/og-banner.png`,
   email: 'abdallahsira47@gmail.com',
   github: 'https://github.com/asera-1',
   linkedin: 'https://www.linkedin.com/in/abdalla-sera-aa67b61b5',

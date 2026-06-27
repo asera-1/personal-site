@@ -21,12 +21,12 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
   title: {
-    default: siteMetadata.title,
+    default: 'Abdalla Sera · Co-founder of Flowent',
     template: `%s | ${siteMetadata.title}`,
   },
   description: siteMetadata.description,
   openGraph: {
-    title: siteMetadata.title,
+    title: 'Abdalla Sera · Co-founder of Flowent',
     description: siteMetadata.description,
     url: './',
     siteName: siteMetadata.title,
@@ -50,11 +50,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
   },
 }
 
