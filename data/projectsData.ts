@@ -14,6 +14,12 @@ const projectsData: Project[] = [
     href: '/blog/building-flowent',
   },
   {
+    title: 'flowent-shotkit',
+    tag: 'Engineering, tooling',
+    description: `A TypeScript tool I built to turn raw app screenshots into store-ready App Store and Google Play kits. One engine composes each screenshot from layers (background, device, screen, status bar, headline) and renders every store size from a single config, with a browser studio and an optional AI headline writer. Runs with no backend; live demo on GitHub Pages.`,
+    href: '/blog/flowent-shotkit',
+  },
+  {
     title: 'GPT from Scratch: a small language model',
     tag: 'Engineering, NLP',
     description: `A decoder only Transformer language model built from scratch in PyTorch, including a BPE tokenizer, the training loop, and evaluation. By reworking the model and the data pipeline I brought validation perplexity down from 126 to 83.`,
