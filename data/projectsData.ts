@@ -14,10 +14,10 @@ const projectsData: Project[] = [
     href: '/blog/building-flowent',
   },
   {
-    title: 'flowent-shotkit',
+    title: 'Launch Studio',
     tag: 'Engineering, tooling',
-    description: `A TypeScript tool I built to turn raw app screenshots into store-ready App Store and Google Play kits. One engine composes each screenshot from layers (background, device, screen, status bar, headline) and renders every store size from a single config, with a browser studio and an optional AI headline writer. Runs with no backend; live demo on GitHub Pages.`,
-    href: '/blog/flowent-shotkit',
+    description: `A tool I built to turn raw app screenshots into store-ready App Store, Google Play, and Product Hunt kits, entirely in the browser. A Canvas2D render engine composes each screenshot from device frames, brand backgrounds, and headlines, with an optional AI writer. Built with Next.js and TypeScript; live demo online.`,
+    href: '/blog/launch-studio',
   },
   {
     title: 'GPT from Scratch: a small language model',

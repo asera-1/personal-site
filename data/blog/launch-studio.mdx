@@ -1,0 +1,27 @@
+---
+title: 'Launch Studio: store screenshots that run in your browser'
+date: '2026-06-28'
+tags: ['typescript', 'nextjs', 'tooling']
+draft: false
+summary: 'A tool I built to turn raw app screenshots into store-ready App Store, Google Play, and Product Hunt kits, entirely in the browser. A Canvas2D render engine composes each screenshot from layers, with device frames, brand themes, and an optional AI headline writer.'
+---
+
+Every app release needs a fresh set of store screenshots: the right sizes, on brand, with readable headlines. Doing that by hand is slow and has to be redone every time. Launch Studio is the tool I built to make it a render job instead of a design task, and it runs entirely in your browser, with no server and nothing uploaded.
+
+## What it does
+
+You drop in your raw screenshots and it renders a full store kit: the correct sizes for the App Store (iPhone 6.9 and 6.5 inch, iPad 13 inch), Google Play (phone, 10 inch tablet, feature graphic), and Product Hunt. Everything runs on a canvas on your own machine, so your screenshots never leave it, and you export the finished kit as a ZIP with a contact sheet and a manifest.
+
+## How it works
+
+A store screenshot is a stack of layers: a background, a device frame, the app screen, a status bar, and a headline. Launch Studio is built around a small render engine that composes those layers. You can use the built-in device frames (titanium, black, silver) or drop in your own mockup, and it detects the screen and swaps your screenshot in. Backgrounds come as presets, a brand-color picker, or a palette pulled from your screenshot, with gradient styles and a film-grain layer for texture. Type is set in one of several clean fonts.
+
+## The AI part, kept optional
+
+Writing a good one-line headline for each slide is the slow part, so there is an optional AI writer (you bring your own key) that drafts them, with multi-language export. It is optional: the tool works fully without it.
+
+## Under the hood
+
+Launch Studio is a Next.js app (App Router, React, TypeScript, Tailwind, shadcn/ui). The render engine itself is a framework-agnostic TypeScript library over Canvas2D, so the same code runs in the browser and in Node. It grew out of an earlier command-line version I built for Flowent's own store listings.
+
+Live: [launch-studio-three.vercel.app](https://launch-studio-three.vercel.app) · Code: [github.com/asera-1/launch-studio](https://github.com/asera-1/launch-studio)
