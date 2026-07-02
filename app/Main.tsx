@@ -124,6 +124,26 @@ export default function Home({ posts }) {
           {projectsData.map((p) => {
             const inner = (
               <div className="h-full rounded-2xl border border-[#16294f] bg-[#0E2147]/40 p-6 transition hover:border-[#34C7EC]/60">
+                {p.imgSrc && (
+                  <div
+                    style={{
+                      aspectRatio: '16 / 9',
+                      width: '100%',
+                      overflow: 'hidden',
+                      borderRadius: 8,
+                      border: '1px solid #16294f',
+                      background: '#0A1733',
+                      marginBottom: 16,
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.imgSrc}
+                      alt={p.title}
+                      style={{ height: '100%', width: '100%', objectFit: 'contain' }}
+                    />
+                  </div>
+                )}
                 <div className="font-mono text-[11px] tracking-wider text-[#34C7EC] uppercase">
                   {p.tag}
                 </div>

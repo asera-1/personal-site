@@ -12,24 +12,28 @@ const projectsData: Project[] = [
     tag: 'Venture, co-founder',
     description: `An AI speaking practice platform for university language programs. It uses large language models and voice AI to give learners structured speaking practice, grounded in research on second language acquisition. We signed our first institutional contract with the Universität Osnabrück Language Centre and ship native iOS and Android apps. I work across product, engineering, sales, and fundraising.`,
     href: '/blog/building-flowent',
+    imgSrc: '/static/images/projects/flowent.jpg',
   },
   {
     title: 'Launch Studio',
     tag: 'Engineering, tooling',
     description: `A tool I built to turn raw app screenshots into store-ready App Store, Google Play, and Product Hunt kits, entirely in the browser. A Canvas2D render engine composes each screenshot from device frames, brand backgrounds, and headlines, with an optional AI writer. Built with Next.js and TypeScript; live demo online.`,
     href: '/blog/launch-studio',
+    imgSrc: '/static/images/projects/launch-studio.jpg',
   },
   {
     title: 'GPT from Scratch: a small language model',
     tag: 'Engineering, NLP',
     description: `A decoder only Transformer language model built from scratch in PyTorch, including a BPE tokenizer, the training loop, and evaluation. By reworking the model and the data pipeline I brought validation perplexity down from 126 to 83.`,
     href: '/blog/building-gpt-from-scratch',
+    imgSrc: '/static/images/projects/gpt-from-scratch.png',
   },
   {
     title: 'Scaling laws, SFT, and LoRA',
     tag: 'Research, NLP',
     description: `A study on a small GPT trained on Shakespeare. A four by four scaling law grid over model and data size, supervised fine-tuning on two downstream tasks, and a from scratch LoRA implementation that matches full fine-tuning while training about 0.34 percent of the parameters. Built on nanoGPT.`,
     href: '/blog/scaling-laws-sft-lora',
+    imgSrc: '/static/images/projects/scaling-laws.png',
   },
   {
     title: 'Demand Forecasting',
@@ -42,6 +46,7 @@ const projectsData: Project[] = [
     tag: 'Engineering, networks',
     description: `My B.Eng. graduation project. A multi branch enterprise network with a spine and leaf data center and an end to end MPLS service provider core, using OSPF, MP-BGP, VRF, and HSRP, built and tested in EVE-NG.`,
     href: '/blog/enterprise-network-emulation',
+    imgSrc: '/static/images/projects/network.png',
   },
 ]
 
